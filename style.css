@@ -1,0 +1,46 @@
+body {
+  background: green;
+}
+
+#page-title {
+  text-align: center;
+  font-size: 45px;
+}
+
+.game-board {
+  height: 600px;
+  width: 600px;
+  margin: auto;
+  border: 15px solid brown;
+}
+
+.square {
+  height: 61px;
+  width: 61px;
+  padding: 6px;
+  display: inline-block;
+  margin: 0;
+  background: white;
+  border: 1px solid black;
+  font-size: 50px;
+  text-align: center;
+  vertical-align: top;
+  float: left;
+}
+
+.g {
+  background: grey;
+}
+
+.score {
+  height: 175px;
+  width: 150px;
+  border: 5px solid black;
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  padding: 5px;
+  margin: auto;
+
+}
+
