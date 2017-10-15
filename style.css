@@ -7,25 +7,31 @@ body {
   font-size: 45px;
 }
 
+.game {
+  display: flex;
+}
+
 .game-board {
-  height: 600px;
-  width: 600px;
+  height: 520px;
+  width: 520px;
   margin: auto;
   border: 15px solid brown;
+  z-index: 1;
 }
 
 .square {
-  height: 61px;
-  width: 61px;
+  height: 51px;
+  width: 51px;
   padding: 6px;
-  display: inline-block;
-  margin: 0;
+  margin: 0px;
   background: white;
   border: 1px solid black;
   font-size: 50px;
   text-align: center;
   vertical-align: top;
   float: left;
+  display: inline-block;
+  z-index: 2;
 }
 
 .g {
@@ -36,11 +42,67 @@ body {
   height: 175px;
   width: 150px;
   border: 5px solid black;
-  position: absolute;
-  right: 50px;
-  top: 50px;
   padding: 5px;
-  margin: auto;
 
 }
 
+
+.black {
+  display: flex;
+  height: 52px;
+  width:   52px;
+  background: black;
+  border-radius: 35px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.red {
+  display: flex;
+  height: 52px;
+  width:   52px;
+  background: red;
+  border-radius: 35px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+
+}
+
+/*mobile settings*/
+
+@media (max-width: 736px) {
+  .game-board {
+    height: 264px;
+    width: 264px;
+    margin: auto;
+    border: 10px solid brown;
+    z-index: 1;
+  } 
+
+  .square {
+    height: 26px;
+    width: 26px;
+    padding: 3px;
+    margin: 0px;
+    background: white;
+    border: .5px solid black;
+    font-size: 25px;
+    text-align: center;
+    vertical-align: top;
+    float: left;
+    display: inline-block;
+    z-index: 2;
+  }
+
+  .score {
+    height: 120px;
+    width: 75px;
+    border: 2.5px solid black;
+    padding: 5px;
+  }
+
+
+
+}

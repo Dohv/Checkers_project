@@ -5,15 +5,16 @@ const gameBoard = document.querySelectorAll('.square');
 //variable to store the node value of div clicked
 let selectedPiece = null;
 //variable to say whose turn it is in play
-whoseTurn = "R";
+let whoseTurn = "🔴";
 //variables used to declare winner
 let redPieceCount = 12;
 let redScoreCounter = 1;
 
 let blackPieceCount = 12;
 let blackScoreCounter = 1;
+
 //function that loops through array and adds an event listener to every div so that on every click we can keep track of what we are clicking on 
-function checkers(array) {
+var checkers = function(array) {
   for (let i = 0; i < array.length; i++) {
     array[i].addEventListener('click', function() {
       //if statement to see if there are pieces for each team to continue playing, if one team has no more pieces the other team wins and the game stops
@@ -37,6 +38,7 @@ function getCoord(node) {
     isPlayable: node.classList.contains('g'),
     //ran into issues with copying innerHTML because this wont set the actual innerHTML
     value: node.innerHTML,
+    childNode: node.childNode,
     setValue: function(newValue) {
       this.value = newValue;
       this.element.innerHTML = newValue;
@@ -65,6 +67,7 @@ function isValidSelection(coord) {
 function selectPiece(coord) {
   if (isValidSelection(coord)) {
     selectedPiece = coord;
+    console.log(coord);
 
   }
 }
@@ -73,7 +76,7 @@ function movePiece(destCoord) {
   if (isValidMove(destCoord)) {
     destCoord.setValue(selectedPiece.value);
     selectedPiece.setValue("");
-    whoseTurn = whoseTurn === 'R' ? 'B' : 'R';
+    whoseTurn = whoseTurn === '🔴' ? '⚫' : '🔴';
     selectedPiece = null;
   } else {
     let jumpedPiece = getJumpedPiece(destCoord);
@@ -81,7 +84,7 @@ function movePiece(destCoord) {
       if (jumpedPiece !== null) {
         destCoord.setValue(selectedPiece.value);
         selectedPiece.setValue("");
-        if (whoseTurn === 'R') {
+        if (whoseTurn === '🔴') {
           blackPieceCount--;
           const redScore = document.querySelector('.red_score');
           redScore.innerHTML = 'Red: ' + redScoreCounter++;
@@ -91,16 +94,15 @@ function movePiece(destCoord) {
           blackScore.innerHTML = 'Black: ' + blackScoreCounter++;
         }
         if (blackPieceCount === 0) {
-          const span = document.createElement('span');
-          const game = document.querySelector('.game');
-          game.appendChild(span);
-          span.style.fontSize = '100px';
-          span.style.color = 'orange';
-          span.innerHTML = 'RED WINS!'
+          const game = document.getElementById('page-title');
+          game.style.color = 'orange';
+          game.innerHTML = 'RED WINS!'
         } else if (redPieceCount === 0) {
-          span.innerHTML = 'BLACK WINS';
+          const game = document.getElementById('page-title');
+          game.style.color = 'orange';
+          game.innerHTML = 'BLACK WINS';
         }
-        whoseTurn = whoseTurn === 'R' ? 'B' : 'R';
+        whoseTurn = whoseTurn === '🔴' ? '⚫' : '🔴';
         jumpedPiece.innerHTML = "";
         selectedPiece = null;
       }
@@ -112,8 +114,8 @@ function isValidMove(destCoord) {
   
  return (destCoord.value === "" &&
    ((destCoord.x === selectedPiece.x - 1 ) || (destCoord.x === selectedPiece.x + 1)
-  && ((whoseTurn === 'R' && destCoord.y === selectedPiece.y + 1)
-  || (whoseTurn === 'B' && destCoord.y === selectedPiece.y - 1))) )
+  && ((whoseTurn === '🔴' && destCoord.y === selectedPiece.y + 1)
+  || (whoseTurn === '⚫' && destCoord.y === selectedPiece.y - 1))) )
 }
 
 
@@ -132,7 +134,7 @@ function getJumpedPiece(destCoord) {
 
   let changeInY = destCoord.y - selectedPiece.y;
 
-  if (!(changeInY === -2  && whoseTurn === 'B') && !(changeInY === 2 && whoseTurn === 'R')) {
+  if (!(changeInY === -2  && whoseTurn === '⚫') && !(changeInY === 2 && whoseTurn === '🔴')) {
     return null;
   }
 
